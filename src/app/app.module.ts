@@ -11,6 +11,7 @@ import { SignupDriverComponent } from './signup-driver/signup-driver.component';
 import { SigninDriverComponent } from './signin-driver/signin-driver.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     SignupAdminComponent,
     SignupDriverComponent,
     SigninDriverComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

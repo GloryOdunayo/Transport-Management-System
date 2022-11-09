@@ -1,4 +1,4 @@
-<div className="container-fluid">
+<!-- <div className="container-fluid">
     <div className="row mt-5">
         <div className="col-lg-6 bg-light shadow mx-auto px-4 mt-5">
             <h2 className="text-center my-2" style=' color: "#3E0748"'>
@@ -47,5 +47,84 @@
                 </div>
             </form>
         </div>
+    </div>
+</div> -->
+
+
+
+<div className="container-fluid">
+    <div className="row mt-5">
+    <div className="col-lg-6 bg-light shadow mx-auto px-4 mt-5">
+        <h2 className="text-center my-2" style="color: #3E0748">
+        Sign Up
+        </h2>
+        <p>
+        <b className="text-danger">{{message}}</b>
+        </p>
+        <form action="" [formGroup]="userForm">
+            <h4 class="mx-auto text-center">Reactive Form</h4>
+            <div class="form-group">
+                <label for="">First Name</label>
+                <input type="text" name="firstname" id="" class="form-control" formControlName="firstname"
+                [class.is-valid]="userForm.get('firstname')?.valid && userForm.get('firstname')?.touched"  
+                [class.is-invalid]="userForm.get('firstname')?.invalid && userForm.get('firstname')?.touched"/>
+                <div *ngIf="userForm.get('firstname')?.errors">
+                    <span *ngIf="userForm.get('firstname')?.errors?.['required'] && userForm.get('firstname')?.touched" class="text-danger">First Name is required</span>
+                    <span *ngIf="userForm.get('firstname')?.errors?.['minlength']  && userForm.get('firstname')?.touched" class="text-danger">Minimum length is 3 Character</span>
+                    <span *ngIf="userForm.get('firstname')?.errors?.['maxlength']  && userForm.get('firstname')?.touched" class="text-danger">Maximum length is 22 Character</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Last Name</label>
+                <input type="text" name="lastname" id="" class="form-control" formControlName="lastname"
+                [class.is-valid]="userForm.get('lastname')?.valid && userForm.get('lastname')?.touched"  
+                [class.is-invalid]="userForm.get('lastname')?.invalid && userForm.get('lastname')?.touched"/>
+                <div *ngIf="userForm.get('lastname')?.errors">
+                    <span *ngIf="userForm.get('lastname')?.errors?.['required'] && userForm.get('lastname')?.touched" class="text-danger">Last Name is required</span>
+                    <span *ngIf="userForm.get('lastname')?.errors?.['minlength']  && userForm.get('lastname')?.touched" class="text-danger">Minimum length is 3 Character</span>
+                    <span *ngIf="userForm.get('lastname')?.errors?.['maxlength']  && userForm.get('lastname')?.touched" class="text-danger">Maximum length is 22 Character</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input type="email" name="email" id="" class="form-control" formControlName="email"
+                [class.is-valid]="userForm.get('email')?.valid && userForm.get('email')?.touched"  
+                [class.is-invalid]="userForm.get('email')?.invalid && userForm.get('email')?.touched"/>
+                <div *ngIf="userForm.get('email')?.errors">
+                    <span *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched" class="text-danger">Email is required</span>
+                    <span *ngIf="userForm.get('email')?.errors?.['minlength']  && userForm.get('email')?.touched" class="text-danger">Minimum length is 5 Character</span>
+                    <span *ngIf="userForm.get('email')?.errors?.['maxlength']  && userForm.get('email')?.touched" class="text-danger">Maximum length is 22 Character</span>
+                    <span *ngIf="userForm.get('email')?.errors?.['email']  && userForm.get('email')?.touched" class="text-danger">Must be an Email</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" name="password" id="" class="form-control" formControlName="email"
+                [class.is-valid]="userForm.get('password')?.valid && userForm.get('password')?.touched"  
+                [class.is-invalid]="userForm.get('password')?.invalid && userForm.get('password')?.touched"/>
+                <div *ngIf="userForm.get('password')?.errors">
+                    <span *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched" class="text-danger">Email is required</span>
+                    <span *ngIf="userForm.get('email')?.errors?.['minlength']  && userForm.get('email')?.touched" class="text-danger">Minimum length is 5 Character</span>
+                    <span *ngIf="userForm.get('email')?.errors?.['maxlength']  && userForm.get('email')?.touched" class="text-danger">Maximum length is 22 Character</span>
+                    <span *ngIf="userForm.get('email')?.errors?.['email']  && userForm.get('email')?.touched" class="text-danger">Must be an Email</span>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-info" [disabled]="userForm.invalid">Submit</button>
+            </div>
+        </form>
+        <div className="my-3">
+            <small className="ms-2 fs-6">
+                Already have an account?
+                <a
+                className="fw-bold"
+                style="color: #3E0748"
+                href="/signin"
+                >
+                Sign in
+                </a>
+            </small>
+        </div>
+    </div>
     </div>
 </div>
