@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiServiceService } from '../services/api-service.service';
 
 @Component({
   selector: 'app-signin',
@@ -7,28 +9,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  public email ='';
-  public password = '';
   public message ='';
-  public userArray = [];
+  public userForm = this.formBuilder.group({
+    email:["",[Validators.required, Validators.minLength(5), Validators.maxLength(22), Validators.email]],
+    password:[""]
+  })
 
   constructor(
-    public router:Router
+    public router:Router,
+    public formBuilder: FormBuilder,
+    public apiService: ApiServiceService
   ) { }
 
   ngOnInit(): void {
   }
 
   login(){
-    let found = this.userArray.find((item:any, index:any)=>item.email == this.email && item.password == this.password)
-    if(found){
-      console.log("I found the user");
-      localStorage.setItem("email",this.email);
-      this.router.navigate(["/users"])
-    } else {
-      this.message='Invalid Credentials'
-      console.log("Not found");
-    }
+    console.log(this.userForm.value);
+    let userDetails = this.userForm.value;
+    this.apiService.signinUser(userDetails).subscribe(data=>{
+      console.log(data);
+    },error=>console.log(error)
+    );
   }
 
 }

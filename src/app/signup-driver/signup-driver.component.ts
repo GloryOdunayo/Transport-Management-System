@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ApiServiceService } from '../services/api-service.service';
 
 @Component({
   selector: 'app-signup-driver',
@@ -8,36 +9,27 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class SignupDriverComponent implements OnInit {
  public message = '';
- public firstname = '';
- public lastname = '';
- public email = '';
- public password = '';
   constructor(
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public apiService: ApiServiceService
   ) { }
 
   public userForm = this.formBuilder.group({
     firstname:["", [Validators.required, Validators.minLength(3), Validators.maxLength(22)]],
     lastname:["", [Validators.required, Validators.minLength(3), Validators.maxLength(22)]],
     email:["",[Validators.required, Validators.minLength(5), Validators.maxLength(22), Validators.email]],
-    age:["", Validators.required],
-    password:["", Validators.pattern('[a-z]')]
+    password:[""]
   })
   ngOnInit(): void {
   }
 
   signup=()=>{
-    let userDetails = {firstname:this.firstname, lastname:this.lastname, email:this.email, password:this.password};
-    // console.log(userDetails);
-    // if(this.userArray){
-    //   this.userArray.push(userDetails)
-    //   console.log(this.userArray);
-    //   localStorage.setItem("allUsers", JSON.stringify(this.userArray))
-    //   this.message = "User Save Successfully"
-    //   this.router.navigate(["/users"])
-    // } else{
-    //   this.message = "error occured"
-    // }
+    console.log(this.userForm.value);
+    let userDetails = this.userForm.value;
+    this.apiService.signupDriver(userDetails).subscribe(data=>{
+      console.log(data);
+    },error=>console.log(error)
+    );
   }
 
 }

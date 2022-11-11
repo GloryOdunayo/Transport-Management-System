@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ApiServiceService } from '../services/api-service.service';
 
 @Component({
   selector: 'app-signin-driver',
@@ -6,26 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signin-driver.component.css']
 })
 export class SigninDriverComponent implements OnInit {
-  public email ='';
-  public password = '';
   public message ='';
-  public userArray = [];
+  public userForm = this.formBuilder.group({
+    email:["",[Validators.required, Validators.minLength(5), Validators.maxLength(22), Validators.email]],
+    password:[""]
+  })
 
-  constructor() { }
+  constructor(
+    public formBuilder: FormBuilder,
+    public apiService: ApiServiceService
+  ) { }
 
   ngOnInit(): void {
   }
 
   login(){
-    let found = this.userArray.find((item:any, index:any)=>item.email == this.email && item.password == this.password)
-    if(found){
-      console.log("I found the user");
-      // localStorage.setItem("email",this.email);
-      // this.router.navigate(["/users"])
-    } else {
-      this.message='Invalid Credentials'
-      console.log("Not found");
-    }
+    console.log(this.userForm.value);
+    let userDetails = this.userForm.value;
+    this.apiService.signinDriver(userDetails).subscribe(data=>{
+      console.log(data);
+    },error=>console.log(error)
+    );
   }
 
 }

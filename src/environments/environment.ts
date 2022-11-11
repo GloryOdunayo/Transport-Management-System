@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url1: "http://localhost:5000/driver",
+  url2: "http://localhost:5000/user",
+  url3: "http://localhost:5000/admin"
 };
 
 /*
